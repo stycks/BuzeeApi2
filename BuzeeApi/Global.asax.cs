@@ -22,6 +22,7 @@ namespace BuzeeApi
 
             using (var ctx = new DBBase())
             {
+                ctx.Database.Delete();
                 User usr = new User() { Name = "Mall Mets" };
                 Group grp = new Group() { Name = "koogigrupp" };
                 Status stts = new Status() { Name = "Busy" };

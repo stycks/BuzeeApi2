@@ -6,17 +6,22 @@ using System.Net.Http;
 using System.Web.Http;
 using BuzeeApi.Models;
 
+
 namespace BuzeeApi.Controllers
 {
     public class UsersController : ApiController
     {
-
         
         static readonly IUserRepository repository = new UserRepository();
 
-        public IEnumerable<User> GetAllUsers()
+        public List<User> GetAllUsers()
         {
-            return repository.GetAll();
+            List<User> users;
+            using (var ctx = new DBBase())
+            {
+                users = ctx.Users.ToList();
+            }
+            return users;
         }
 
         public User GetUser(int id)
@@ -30,12 +35,12 @@ namespace BuzeeApi.Controllers
             return item;
         }
 
-        public IEnumerable<User> GetUsersByStatus(Status status)
-        {
-            using (var ctx = new DBBase()) { }
-            return repository.GetAll().Where(
-               p => p.Status.Id == status.Id);
-        }
+        //public IEnumerable<User> GetUsersByStatus(Status status)
+        //{
+        //    using (var ctx = new DBBase()) { }
+        //    return repository.GetAll().Where(
+        //       p => p.Status.Id == status.Id);
+        //}
 
         //public IEnumerable<User> GetUsersByStatus(Status status)
         //{
