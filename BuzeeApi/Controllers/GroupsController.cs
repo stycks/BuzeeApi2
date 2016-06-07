@@ -8,21 +8,19 @@ using BuzeeApi.Models;
 
 namespace BuzeeApi.Controllers
 {
-    public class UsersController : ApiController
+    public class GroupsController : ApiController
     {
+        static readonly IGroupRepository repository = new GroupRepository();
 
-        
-        static readonly IUserRepository repository = new UserRepository();
-
-        public IEnumerable<User> GetAllUsers()
+        public IEnumerable<Group> GetAllGroups()
         {
             return repository.GetAll();
         }
 
-        public User GetUser(int id)
+        public Group GetGroup(int id)
         {
             using (var ctx = new DBBase()) { }
-            User item = repository.Get(id);
+            Group item = repository.Get(id);
             if (item == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -30,45 +28,38 @@ namespace BuzeeApi.Controllers
             return item;
         }
 
-        public IEnumerable<User> GetUsersByStatus(Status status)
-        {
-            using (var ctx = new DBBase()) { }
-            return repository.GetAll().Where(
-               p => p.Status.Id == status.Id);
-        }
-
-        //public IEnumerable<User> GetUsersByStatus(Status status)
+        //public IEnumerable<User> GetUsersByStatus(string status)
         //{
         //    using (var ctx = new DBBase()) { }
         //    return repository.GetAll().Where(
-        //        p => int.Equals(p.Status.Id, status.Id, StringComparison.OrdinalIgnoreCase));
+        //        p => string.Equals(p.Status, status, StringComparison.OrdinalIgnoreCase));
         //}
 
-        public HttpResponseMessage PostUser(User item)
+        public HttpResponseMessage PostGroup(Group item)
         {
             using (var ctx = new DBBase()) { }
             item = repository.Add(item);
-            var response = Request.CreateResponse<User>(HttpStatusCode.Created, item);
+            var response = Request.CreateResponse<Group>(HttpStatusCode.Created, item);
 
             string uri = Url.Link("DefaultApi", new { id = item.Id });
             response.Headers.Location = new Uri(uri);
             return response;
         }
 
-        public void PutUser(int id, User user)
+        public void PutGroup(int id, Group group)
         {
             using (var ctx = new DBBase()) { }
-            user.Id = id;
-            if (!repository.Update(user))
+            group.Id = id;
+            if (!repository.Update(group))
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
         }
 
-        public void DeleteUser(int id)
+        public void DeleteGroup(int id)
         {
             using (var ctx = new DBBase()) { }
-            User item = repository.Get(id);
+            Group item = repository.Get(id);
             if (item == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -77,7 +68,4 @@ namespace BuzeeApi.Controllers
             repository.Remove(id);
         }
     }
-
-
-
 }

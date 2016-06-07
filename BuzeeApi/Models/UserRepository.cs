@@ -12,9 +12,9 @@ namespace BuzeeApi.Models
 
         public UserRepository()
         {
-            Add(new User { Name = "Mati Kaal", Status = "Busy" });
-            Add(new User { Name = "Siiri Uus", Status = "Not busy" });
-            Add(new User { Name = "Peeter Rebane", Status = "A Bit busy" });
+            //Add(new User { Name = "Mati Kaal", Status = "Busy" });
+            //Add(new User { Name = "Siiri Uus", Status = "Not busy" });
+            //Add(new User { Name = "Peeter Rebane", Status = "A Bit busy" });
         }
 
         public IEnumerable<User> GetAll()
