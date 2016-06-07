@@ -11,7 +11,7 @@ namespace BuzeeApi.Controllers
 {
     public class UsersController : ApiController
     {
-        
+
         static readonly IUserRepository repository = new UserRepository();
 
         public List<User> GetAllUsers()
