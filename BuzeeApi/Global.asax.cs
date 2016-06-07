@@ -23,8 +23,12 @@ namespace BuzeeApi
             using (var ctx = new DBBase())
             {
                 User usr = new User() { Name = "Mall Mets" };
+                Group grp = new Group() { Name = "koogigrupp" };
+                Status stts = new Status() { Name = "Busy" };
 
                 ctx.Users.Add(usr);
+                ctx.Groups.Add(grp);
+                ctx.Statuses.Add(stts);
                 ctx.SaveChanges();
             }
         }

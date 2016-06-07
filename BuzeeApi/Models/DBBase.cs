@@ -15,5 +15,6 @@ namespace BuzeeApi.Models
 
         public DbSet<User> Users { get; set; }
         public DbSet<Group> Groups { get; set; }
+        public DbSet<Status> Statuses { get; set; }
     }
 }
