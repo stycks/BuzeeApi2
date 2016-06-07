@@ -5,13 +5,11 @@ using System.Web;
 
 namespace BuzeeApi.Models
 {
-    public class User
+    public class Status
     {
-        public User() { }
+        public Status() { }
         public int Id { get; set; }
         public string Name { get; set; }
-        public Status Status { get; set; }
-
-        public Group Group { get; set; }
+        public ICollection<User> Users { get; set; }
     }
 }
